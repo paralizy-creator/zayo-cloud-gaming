@@ -1,58 +1,199 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#090d1b">
 <title>Zayo Cloud Gaming</title>
 <style>
-:root{color-scheme:dark;--bg:#090d1b;--panel:#121a30;--muted:#aab5d1;--cyan:#52e5ff;--purple:#9874ff}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0%,#25205a 0,transparent 34%),var(--bg);color:#f6f7ff;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-header{padding:22px max(18px,calc((100% - 1100px)/2));display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff16;position:sticky;top:0;background:#090d1bdd;backdrop-filter:blur(12px);z-index:3}
-.logo{font-weight:900;letter-spacing:.5px;font-size:20px}.logo span{color:var(--cyan)}.status{font-size:12px;color:#a8f4c7;border:1px solid #2d805b;padding:6px 10px;border-radius:30px}
-main{max-width:1100px;margin:auto;padding:28px 18px 60px}.hero{padding:30px 24px;border:1px solid #ffffff20;border-radius:24px;background:linear-gradient(120deg,#182a50,#292052 70%,#17213c);overflow:hidden}
-.eyebrow{color:var(--cyan);font-size:12px;font-weight:800;letter-spacing:2px}.hero h1{font-size:clamp(30px,7vw,54px);line-height:1.04;margin:12px 0}.hero p{max-width:620px;color:#d0d8ee;line-height:1.6}.pill{display:inline-block;background:#ffffff18;border:1px solid #ffffff20;border-radius:30px;padding:8px 12px;font-size:12px;margin:6px 5px 0 0}
-h2{margin:32px 0 14px;font-size:22px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.card{background:var(--panel);border:1px solid #ffffff18;border-radius:18px;padding:18px;min-height:190px;display:flex;flex-direction:column}.art{height:90px;border-radius:13px;display:grid;place-items:center;font-size:42px;background:linear-gradient(135deg,#163b59,#422b75);margin-bottom:14px}.card h3{margin:0 0 6px}.card p{margin:0 0 16px;color:var(--muted);font-size:13px;line-height:1.5;flex:1}
-button{border:0;border-radius:12px;padding:12px 15px;background:linear-gradient(90deg,#41d9f6,#8a75ff);color:#07101d;font-weight:900;font-size:14px;cursor:pointer}button:active{transform:scale(.98)}button.secondary{background:#ffffff16;color:#f5f6ff;border:1px solid #ffffff24}
-.note{margin-top:22px;padding:16px;border-radius:14px;background:#111a2c;border:1px solid #ffffff16;color:#c4cce0;font-size:13px;line-height:1.6}
-#game{display:none;margin-top:24px;background:#101a2d;border:1px solid #ffffff22;border-radius:20px;padding:18px}#game.active{display:block}.gamehead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.arena{height:230px;margin:16px 0;border-radius:16px;background:radial-gradient(circle,#203d66,#0b1222);display:grid;place-items:center;position:relative;overflow:hidden}.target{width:78px;height:78px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#55e7ff 28%,#3372ff 72%);box-shadow:0 0 35px #50dfff;display:none;position:absolute;touch-action:manipulation}.target.show{display:block}.score{font-weight:800;color:var(--cyan)}.small{font-size:12px;color:var(--muted)}
-footer{text-align:center;color:#7783a2;font-size:12px;padding:20px}
+*{box-sizing:border-box}
+body{margin:0;background:#080b18;color:white;font-family:Arial,sans-serif}
+header{padding:25px;text-align:center;background:linear-gradient(120deg,#111b45,#32105d)}
+h1{color:#65d8ff;margin:5px}
+main{max-width:900px;margin:auto;padding:18px}
+h2{color:#65d8ff}
+.games{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.card{background:#151b32;border:1px solid #29365e;border-radius:15px;padding:18px}
+button{background:#1769ff;color:white;border:0;padding:12px 18px;border-radius:9px;font-weight:bold;margin:5px;cursor:pointer}
+button:hover{background:#4385ff}
+#game{display:none;text-align:center;background:#11182c;padding:15px;border-radius:15px;margin-top:20px}
+canvas{background:#050914;border:2px solid #4169ff;border-radius:10px;max-width:100%;touch-action:none}
+#score{font-size:20px;color:#65d8ff}
+footer{text-align:center;color:#888;padding:25px}
 </style>
 </head>
 <body>
-<header><div class="logo">ZAYO <span>CLOUD</span></div><div class="status">● PROTÓTIPO ONLINE</div></header>
+<header>
+<h1>🎮 ZAYO CLOUD GAMING</h1>
+<p>Sua diversão começa aqui!</p>
+</header>
 <main>
-<section class="hero">
-<div class="eyebrow">SEU UNIVERSO DE JOGOS</div>
-<h1>Jogue. Explore.<br><span style="color:var(--cyan)">Sem limites.</span></h1>
-<p>Bem-vindo ao Zayo Cloud Gaming. Esta é a primeira versão da nossa plataforma, preparada para celular e computador.</p>
-<span class="pill">📱 Compatível com Android</span><span class="pill">🎮 Controles por toque</span><span class="pill">🌐 Jogos no navegador</span>
-</section>
 <h2>Biblioteca de jogos</h2>
-<section class="grid">
-<article class="card"><div class="art">⚡</div><h3>Reflexo Zayo</h3><p>Toque no alvo o mais rápido que conseguir e bata seu recorde.</p><button onclick="startGame()">JOGAR AGORA</button></article>
-<article class="card"><div class="art">🕹️</div><h3>Arcade em breve</h3><p>Espaço reservado para adicionarmos novos jogos leves que rodam direto no navegador.</p><button class="secondary" onclick="alert('Novos jogos serão adicionados nas próximas etapas!')">EM BREVE</button></article>
-<article class="card"><div class="art">☁️</div><h3>Cloud Streaming</h3><p>Futura área para transmitir jogos executados em um servidor remoto compatível.</p><button class="secondary" onclick="alert('O streaming remoto será desenvolvido em uma etapa futura. Esta versão ainda não transmite jogos de PC ou Xbox.')">SAIBA MAIS</button></article>
-</section>
-<section id="game">
-<div class="gamehead"><div><strong>⚡ Reflexo Zayo</strong><div class="small">Toque no círculo azul quando ele aparecer.</div></div><div class="score">Pontos: <span id="score">0</span></div></div>
-<div class="arena" id="arena"><div id="message" style="text-align:center;color:#cbd7f2;padding:20px">Pressione “Começar” para jogar.</div><button aria-label="Alvo" class="target" id="target"></button></div>
-<div style="display:flex;gap:10px;flex-wrap:wrap"><button id="start">COMEÇAR</button><button class="secondary" onclick="stopGame()">FECHAR JOGO</button></div>
-<div class="small" style="margin-top:12px">Dica: funciona com toque na tela ou clique do mouse.</div>
-</section>
-<div class="note"><strong>Sobre esta versão:</strong> este site é a primeira demonstração jogável. Os jogos desta etapa rodam no próprio navegador. Ele ainda não é um servidor de cloud gaming e não transmite jogos pesados remotamente. Para isso será necessário conectar um computador/servidor que execute os jogos e envie o vídeo pela internet.</div>
+<div class="games">
+<div class="card">
+<h3>⚡ Reflexo Zayo</h3>
+<p>Teste sua velocidade e seus reflexos.</p>
+<button onclick="start('reflexo')">Jogar agora</button>
+</div>
+<div class="card">
+<h3>🐍 Cobrinha Neon</h3>
+<p>Controle a cobrinha e consiga pontos.</p>
+<button onclick="start('cobra')">Jogar agora</button>
+</div>
+<div class="card">
+<h3>🧠 Memória Zayo</h3>
+<p>Encontre os pares de cartas.</p>
+<button onclick="start('memoria')">Jogar agora</button>
+</div>
+</div>
+<div id="game">
+<h2 id="gameTitle">Jogo</h2>
+<div id="score"></div>
+<canvas id="canvas" width="320" height="320"></canvas>
+<div id="controls"></div>
+<button onclick="start(current)">Reiniciar</button>
+<button onclick="closeGame()">Voltar</button>
+</div>
 </main>
-<footer>Zayo Cloud Gaming • Projeto independente</footer>
+<footer>Zayo Cloud Gaming © 2026</footer>
 <script>
-let score=0,active=false,timer=null,rounds=0;
-const target=document.getElementById('target'),arena=document.getElementById('arena'),message=document.getElementById('message');
-function startGame(){document.getElementById('game').classList.add('active');document.getElementById('game').scrollIntoView({behavior:'smooth'});resetGame()}
-function resetGame(){clearTimeout(timer);score=0;rounds=0;active=true;document.getElementById('score').textContent=score;message.textContent='Prepare-se...';target.classList.remove('show');timer=setTimeout(showTarget,700)}
-function showTarget(){if(!active)return;if(rounds>=15){finishGame();return}rounds++;const maxX=arena.clientWidth-90,maxY=arena.clientHeight-90;target.style.left=(10+Math.random()*Math.max(0,maxX-20))+'px';target.style.top=(10+Math.random()*Math.max(0,maxY-20))+'px';target.classList.add('show');message.textContent='';timer=setTimeout(()=>{if(target.classList.contains('show')){target.classList.remove('show');timer=setTimeout(showTarget,350)}},1300)}
-target.addEventListener('click',e=>{e.stopPropagation();if(!active||!target.classList.contains('show'))return;score++;document.getElementById('score').textContent=score;target.classList.remove('show');clearTimeout(timer);timer=setTimeout(showTarget,250)});
-function finishGame(){active=false;target.classList.remove('show');message.textContent='Fim! Você fez '+score+' pontos.'}
-function stopGame(){active=false;clearTimeout(timer);target.classList.remove('show');document.getElementById('game').classList.remove('active')}
-document.getElementById('start').addEventListener('click',resetGame);
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+const panel=document.getElementById("game");
+let current="",timer=null,score=0,snake=[],food={},dir={x:1,y:0},cards=[],chosen=[],locked=false;
+
+function start(type){
+clearInterval(timer);
+current=type;score=0;
+panel.style.display="block";
+document.getElementById("controls").innerHTML="";
+document.getElementById("score").textContent="";
+if(type==="reflexo") reflexo();
+if(type==="cobra") cobra();
+if(type==="memoria") memoria();
+}
+function closeGame(){
+clearInterval(timer);panel.style.display="none";
+}
+function reflexo(){
+document.getElementById("gameTitle").textContent="⚡ Reflexo Zayo";
+let waiting=true,ready=false;
+ctx.fillStyle="#050914";ctx.fillRect(0,0,320,320);
+ctx.fillStyle="white";ctx.font="20px Arial";
+ctx.fillText("Toque para começar",75,150);
+canvas.onclick=()=>{
+if(waiting){
+waiting=false;
+ctx.fillStyle="#050914";ctx.fillRect(0,0,320,320);
+ctx.fillStyle="yellow";ctx.font="25px Arial";
+ctx.fillText("AGUARDE...",95,160);
+let delay=1000+Math.random()*3000;
+timer=setTimeout(()=>{
+ready=true;
+ctx.fillStyle="#00dd77";ctx.fillRect(0,0,320,320);
+ctx.fillStyle="black";ctx.fillText("TOQUE AGORA!",75,165);
+},delay);
+}else if(ready){
+let elapsed=Date.now()-begin;
+document.getElementById("score").textContent="Seu tempo: "+elapsed+" ms";
+ready=false;waiting=true;
+}else{
+clearTimeout(timer);
+document.getElementById("score").textContent="Muito cedo! Tente novamente.";
+waiting=true;
+}
+};
+let begin=Date.now();
+let original=canvas.onclick;
+canvas.onclick=()=>{
+if(waiting&&!ready){
+waiting=false;
+ctx.fillStyle="#050914";ctx.fillRect(0,0,320,320);
+ctx.fillStyle="yellow";ctx.font="25px Arial";ctx.fillText("AGUARDE...",95,160);
+timer=setTimeout(()=>{
+ready=true;begin=Date.now();
+ctx.fillStyle="#00dd77";ctx.fillRect(0,0,320,320);
+ctx.fillStyle="black";ctx.fillText("TOQUE AGORA!",75,165);
+},1000+Math.random()*3000);
+}else if(ready){
+document.getElementById("score").textContent="Seu tempo: "+(Date.now()-begin)+" ms";
+ready=false;waiting=true;
+}else{
+clearTimeout(timer);waiting=true;
+document.getElementById("score").textContent="Você clicou cedo! Tente novamente.";
+}
+};
+}
+function cobra(){
+document.getElementById("gameTitle").textContent="🐍 Cobrinha Neon";
+snake=[{x:8,y:8},{x:7,y:8},{x:6,y:8}];
+dir={x:1,y:0};food={x:14,y:12};
+canvas.onclick=null;
+document.getElementById("controls").innerHTML=
+'<button onclick="turn(0,-1)">⬆️</button><br>'+
+'<button onclick="turn(-1,0)">⬅️</button>'+
+'<button onclick="turn(0,1)">⬇️</button>'+
+'<button onclick="turn(1,0)">➡️</button>';
+timer=setInterval(()=>{
+let head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
+if(head.x<0||head.x>=16||head.y<0||head.y>=16||snake.some(s=>s.x===head.x&&s.y===head.y)){
+clearInterval(timer);document.getElementById("score").textContent="Fim de jogo! Pontos: "+score;return;
+}
+snake.unshift(head);
+if(head.x===food.x&&head.y===food.y){
+score++;food={x:Math.floor(Math.random()*16),y:Math.floor(Math.random()*16)};
+}else snake.pop();
+drawSnake();
+document.getElementById("score").textContent="Pontos: "+score;
+},160);
+}
+function turn(x,y){if(x!==-dir.x||y!==-dir.y)dir={x,y}}
+document.onkeydown=e=>{
+if(current==="cobra"){
+if(e.key==="ArrowUp")turn(0,-1);
+if(e.key==="ArrowDown")turn(0,1);
+if(e.key==="ArrowLeft")turn(-1,0);
+if(e.key==="ArrowRight")turn(1,0);
+}
+};
+function drawSnake(){
+ctx.fillStyle="#050914";ctx.fillRect(0,0,320,320);
+ctx.fillStyle="#00ff9d";
+snake.forEach(s=>ctx.fillRect(s.x*20+1,s.y*20+1,18,18));
+ctx.fillStyle="#ff3860";ctx.fillRect(food.x*20+2,food.y*20+2,16,16);
+}
+function memoria(){
+document.getElementById("gameTitle").textContent="🧠 Memória Zayo";
+canvas.onclick=null;
+let symbols=["🚀","🎮","⭐","🐉","🔥","💎","🚀","🎮","⭐","🐉","🔥","💎"];
+cards=symbols.sort(()=>Math.random()-.5);
+chosen=[];locked=false;score=0;
+let html='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">';
+cards.forEach((c,i)=>{
+html+=`<button id="c${i}" style="height:65px;font-size:23px" onclick="flip(${i})">?</button>`;
+});
+document.getElementById("controls").innerHTML=html+"</div>";
+ctx.clearRect(0,0,320,320);
+document.getElementById("score").textContent="Encontre os pares!";
+}
+function flip(i){
+if(locked||chosen.includes(i)||document.getElementById("c"+i).textContent!=="?")return;
+document.getElementById("c"+i).textContent=cards[i];
+chosen.push(i);
+if(chosen.length===2){
+locked=true;
+if(cards[chosen[0]]===cards[chosen[1]]){
+score++;chosen=[];locked=false;
+document.getElementById("score").textContent="Pares encontrados: "+score;
+if(score===6)document.getElementById("score").textContent="🏆 Você venceu!";
+}else{
+setTimeout(()=>{
+chosen.forEach(n=>document.getElementById("c"+n).textContent="?");
+chosen=[];locked=false;
+},800);
+}
+}
+}
 </script>
 </body>
 </html>
